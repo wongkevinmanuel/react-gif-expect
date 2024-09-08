@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import PropTypes from 'prop-types';
 
 export const AddCategory = ({ onNuevaCategoria }) => {
     const [inputValue, setInputValue] = useState('');
@@ -8,6 +9,7 @@ export const AddCategory = ({ onNuevaCategoria }) => {
     }
 
     const onSubmit = (event)=>{
+        console.log('Se disparo el submit del formulario')
         //Evitar refrescar el navegador web
         event.preventDefault();
 
@@ -17,11 +19,10 @@ export const AddCategory = ({ onNuevaCategoria }) => {
         onNuevaCategoria(input );
         setInputValue('');
     }
-
     {/* <form> es el unico elemento root */}
-    
   return (
-    <form onSubmit={ (event) => onSubmit(event) }>
+    <form aria-label='form'
+    onSubmit={ (event) => onSubmit(event) }>
         <input
             type='text'
             placeholder='Buscar gifs'
@@ -29,4 +30,9 @@ export const AddCategory = ({ onNuevaCategoria }) => {
             onChange={ (event)=>onInputChange(event) }></input>
     </form>
     )
+}
+
+AddCategory.propTypes = {
+    //La funcion debe de ser requerida
+    onNuevaCategoria: PropTypes.func.isRequired,
 }
